@@ -67,7 +67,7 @@ def update():
             'comp_gender_pie': cp.comp_gender_pie,
         }
     }
-    return json.dumps(data)
+    return data
 
 
 if __name__ == "__main__":
