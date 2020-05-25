@@ -57,12 +57,11 @@ stud_package_hbar = {
 # ? CGPA Corelation with CTC
 cgpa = [5, 6, 7, 8, 9, 10]
 avg_ctc = [
-    stu_data[stu_data['CGPA'] == 5]['CTC'].mean(),
-    stu_data[stu_data['CGPA'] == 6]['CTC'].mean(),
-    stu_data[stu_data['CGPA'] == 7]['CTC'].mean(),
-    stu_data[stu_data['CGPA'] == 8]['CTC'].mean(),
-    stu_data[stu_data['CGPA'] == 9]['CTC'].mean(),
-    stu_data[stu_data['CGPA'] == 10]['CTC'].mean()
+    stu_data[stu_data['CGPA']==5]['CTC'].mean(),
+    stu_data[stu_data['CGPA']==6]['CTC'].mean(),
+    stu_data[stu_data['CGPA']==7]['CTC'].mean(),
+    stu_data[stu_data['CGPA']==8]['CTC'].mean(),
+    stu_data[stu_data['CGPA']==9]['CTC'].mean()
 ]
 
 stud_cgpa_line = {
