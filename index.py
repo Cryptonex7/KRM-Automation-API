@@ -18,13 +18,13 @@ import services.company as cp
 
 app = Flask(__name__)
 ### swagger specific ###
-SWAGGER_URL = '/swagger'
+SWAGGER_URL = '/docs'
 API_URL = '/static/swagger.json'
 SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
     SWAGGER_URL,
     API_URL,
     config={
-        'app_name': "covid19analytics"
+        'app_name': "KIIT KRM API"
     }
 )
 app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
@@ -73,7 +73,7 @@ def get_all():
 def get_company_list():
     print("Welcome to KRM!")
 
-    data = cp.company_list
+    data = {'company_list': cp.company_list}
     return data
 
 
