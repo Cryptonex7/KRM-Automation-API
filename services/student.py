@@ -27,13 +27,18 @@ stud_hired_per_year_pie = {
 
 # ? Gender Distribution of Student Placed
 stud_gender_pie = {
-    'values': pd.Series(stu_data['Gender']).tolist(),
+    'labels': pd.Series(stu_data['Gender']).tolist(), #[M, F]
+    'values': [pd.Series(stu_data['Gender']).tolist().count('M'), pd.Series(stu_data['Gender']).tolist().count('F')],
     'type': 'pie',
     'title': 'Travel history analysis'
 }
 
+
+
+
 # ? Branch Distribution of Student Placed
 stud_branch_pie = {
+    'labels': pd.Series(stu_data['Branch']).unique().tolist(), 
     'values': pd.Series(stu_data['Branch']).tolist(),
     'type': 'pie',
     'title': 'Travel history analysis'
