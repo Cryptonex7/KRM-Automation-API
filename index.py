@@ -47,7 +47,7 @@ def index():
 
 
 @app.route('/analyse')
-def update():
+def get_all():
     print("Welcome to KRM!")
 
     data = {
@@ -67,6 +67,13 @@ def update():
             'comp_gender_pie': cp.comp_gender_pie,
         }
     }
+    return data
+
+@app.route('/company_list')
+def get_company_list():
+    print("Welcome to KRM!")
+
+    data = cp.company_list
     return data
 
 

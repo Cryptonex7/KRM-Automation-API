@@ -50,3 +50,6 @@ comp_gender_pie = {
     'type': 'pie',
     'title': 'Gender of Students Placed'
 }
+
+# ? List of All Companies
+company_list = pd.Series(company['company']).unique().tolist()
