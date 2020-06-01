@@ -16,7 +16,7 @@ comp_profile_pie = {
     'values': values,
     'labels': profiles.tolist(),
     'type': 'pie',
-    'title': 'Travel history analysis'
+    'title': 'Students hired in Each Profile'
 }
 
 # ? CGPA of Students Placed
@@ -39,7 +39,7 @@ comp_branch_pie = {
     'values': pd.Series(branch_grouped['placed']).tolist(),
     'labels': pd.Series(branch_grouped['Branch']).tolist(),
     'type': 'pie',
-    'title': 'Travel history analysis'
+    'title': 'Branch of Students Placed'
 }
 
 # ? Gender of Students Placed
@@ -48,5 +48,5 @@ comp_gender_pie = {
     'values': pd.Series(gender_grouped['placed']).tolist(),
     'labels': pd.Series(gender_grouped['Gender']).tolist(),
     'type': 'pie',
-    'title': 'Travel history analysis'
+    'title': 'Gender of Students Placed'
 }
