@@ -22,7 +22,7 @@ stud_hired_per_year_pie = {
     'values': pd.Series(year_wise['students']).tolist(),
     'labels': pd.Series(year_wise['year']).tolist(),
     'type': 'pie',
-    'title': 'Travel history analysis'
+    'title': 'Students Hired Per Year'
 }
 
 # ? Gender Distribution of Student Placed
@@ -30,7 +30,7 @@ stud_gender_pie = {
     'labels': pd.Series(stu_data['Gender']).unique().tolist(), #[M, F]
     'values': [pd.Series(stu_data['Gender']).tolist().count('M'), pd.Series(stu_data['Gender']).tolist().count('F')],
     'type': 'pie',
-    'title': 'Travel history analysis'
+    'title': 'Gender Distribution of Student Placed'
 }
 
 
@@ -41,7 +41,7 @@ stud_branch_pie = {
     'labels': pd.Series(stu_data['Branch']).unique().tolist(), 
     'values': pd.Series(stu_data['Branch']).tolist(),
     'type': 'pie',
-    'title': 'Travel history analysis'
+    'title': 'Branch Distribution of Student Placed'
 }
 
 # ? Package Grabbed in a Given Year
