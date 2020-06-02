@@ -17,7 +17,8 @@ import services.student as st
 import services.company as cp
 
 app = Flask(__name__)
-### swagger specific ###
+
+### Swagger Config ###
 SWAGGER_URL = '/docs'
 API_URL = '/static/swagger.json'
 SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
@@ -28,13 +29,13 @@ SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
     }
 )
 app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
-### end swagger specific ###
+### End Swagger Config ###
 
 app.wsgi_app = ProxyFix(app.wsgi_app)
 api = Api(app,
           version='0.1',
-          title='Our sample API',
-          description='This is our sample API'
+          title='Welcom to KRM Automation API',
+          description='The Power of Analytics to Korporate Relationship Management!'
           )
 
 cors = CORS(app)
