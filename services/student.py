@@ -33,19 +33,21 @@ stud_gender_pie = {
     'title': 'Gender Distribution of Student Placed'
 }
 
-
-
-
 # ? Branch Distribution of Student Placed
+stu_data['placed']=1
+bran = stu_data['Branch'].unique()
+pla = []
+for i in range (0, len(bran)):
+    pla.insert(i,stu_data[stu_data['Branch'] == bran[i]]['placed'].sum())
+
 stud_branch_pie = {
-    'labels': pd.Series(stu_data['Branch']).unique().tolist(), 
-    'values': pd.Series(stu_data['Branch']).tolist(),
+    'labels': pd.Series(bran).tolist(), 
+    'values': pd.Series(pla).tolist(),
     'type': 'pie',
     'title': 'Branch Distribution of Student Placed'
 }
 
 # ? Package Grabbed in a Given Year
-stu_data['placed'] = 1
 ctc_grouped = stu_data.groupby('CTC')['placed'].sum().reset_index()
 ctc_grouped_sorted = ctc_grouped.sort_values(by='placed', ascending=False)
 # horizontal bar-graph
