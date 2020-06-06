@@ -154,7 +154,7 @@ def submit_student_data():
 class CompanyData(db.Model):
     __tablename__ = 'companydata'
     name = db.Column(db.String(200), nullable=False)
-    compid = db.Column(db.String(200), primary_key=True)
+    compid = db.Column(db.String(250), primary_key=True)
     hired15 = db.Column(db.Integer, nullable=False)
     hired16 = db.Column(db.Integer, nullable=False)
     hired17 = db.Column(db.Integer, nullable=False)
