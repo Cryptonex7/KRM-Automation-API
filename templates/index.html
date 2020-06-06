@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test template</title>
+  </head>
+  <body>
+    <form action="/student/add" method="POST">
+      <h3>Rollno</h3>
+      <input
+        required
+        type="number"
+        name="rollno"
+        placeholder="Enter student rollno"
+      />
+      <h3>Name</h3>
+      <input
+        required
+        type="text"
+        name="studName"
+        placeholder="Enter student name"
+      />
+      <h3>Gender</h3>
+      <input
+        required
+        type="text"
+        name="gender"
+        placeholder="Enter student gender"
+      />
+      <h3>Branch</h3>
+      <input
+        required
+        type="text"
+        name="branch"
+        placeholder="Enter student branch"
+      />
+      <h3>CGPA</h3>
+      <input
+        required
+        type="number"
+        step="0.01"
+        name="cgpa"
+        placeholder="Enter student cgpa"
+      />
+      <h3>Company</h3>
+      <input required type="text" name="company" placeholder="Enter company" />
+      <h3>Profile</h3>
+      <input
+        required
+        type="text"
+        name="profile"
+        placeholder="Enter job profile"
+      />
+      <h3>CTC</h3>
+      <input
+        required
+        type="number"
+        step="0.01"
+        name="ctc"
+        placeholder="Enter CTC"
+      />
+      <input type="submit" value="submit" class="btn" />
+    </form>
+  </body>
+</html>
