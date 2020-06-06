@@ -35,31 +35,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-class StudentData(db.Model):
-    __tablename__ = 'studentdata'
-    rollno = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200), nullable=False)
-    gender = db.Column(db.String(50), nullable=False)
-    branch = db.Column(db.String(200), nullable=False)
-    cgpa = db.Column(db.Float, nullable=False)
-    company = db.Column(db.String(200), nullable=False)
-    profile = db.Column(db.String(200), nullable=False)
-    ctc = db.Column(db.Float, nullable=False)
-
-    def __init__(self, rollno, name, gender, branch, cgpa, company, profile, ctc):
-        self.rollno = rollno
-        self.name = name
-        self.gender = gender
-        self.branch = branch
-        self.cgpa = cgpa
-        self.company = company
-        self.profile = profile
-        self.ctc = ctc
-
-    def as_dict(self):
-        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
-
-
 ### Swagger Config ###
 SWAGGER_URL = '/docs'
 API_URL = '/static/swagger.json'
@@ -84,9 +59,41 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-@app.route('/form')
-def index():
-    return render_template('index.html')
+# Student db schema
+
+
+class StudentData(db.Model):
+    __tablename__ = 'studentdata'
+    rollno = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200), nullable=False)
+    gender = db.Column(db.String(50), nullable=False)
+    branch = db.Column(db.String(200), nullable=False)
+    cgpa = db.Column(db.Float, nullable=False)
+    company = db.Column(db.String(200), nullable=False)
+    profile = db.Column(db.String(200), nullable=False)
+    ctc = db.Column(db.Float, nullable=False)
+
+    def __init__(self, rollno, name, gender, branch, cgpa, company, profile, ctc):
+        self.rollno = rollno
+        self.name = name
+        self.gender = gender
+        self.branch = branch
+        self.cgpa = cgpa
+        self.company = company
+        self.profile = profile
+        self.ctc = ctc
+
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+# Student form
+
+
+@app.route('/studentform')
+def studentform():
+    return render_template('studentform.html')
+
+# Get all student details
 
 
 @app.route('/student/getall')
@@ -102,9 +109,11 @@ def get_student_data():
         )
         return response
 
+# Add new students to the db
+
 
 @app.route('/student/add', methods=['POST'])
-def submit():
+def submit_student_data():
     if request.method == 'POST':
         rollno = request.form['rollno']
         name = request.form['studName']
@@ -135,6 +144,85 @@ def submit():
         response = app.response_class(
             response=json.dumps(
                 'Could not add new student, check for duplicate roll number'),
+            status=400,
+            mimetype='application/json'
+        )
+        return response
+
+
+# company db schema
+class CompanyData(db.Model):
+    __tablename__ = 'companydata'
+    name = db.Column(db.String(200), nullable=False)
+    compid = db.Column(db.String(200), primary_key=True)
+    hired15 = db.Column(db.Integer, nullable=False)
+    hired16 = db.Column(db.Integer, nullable=False)
+    hired17 = db.Column(db.Integer, nullable=False)
+    hired18 = db.Column(db.Integer, nullable=False)
+    hired19 = db.Column(db.Integer, nullable=False)
+
+    def __init__(self, name, compid, hired15, hired16, hired17, hired18, hired19):
+        self.name = name
+        self.compid = compid
+        self.hired15 = hired15
+        self.hired16 = hired16
+        self.hired17 = hired17
+        self.hired18 = hired18
+        self.hired19 = hired19
+
+    def as_dict(self):
+        return {c.name: getattr(self, c.name) for c in self.__table__.columns}
+
+# Company form
+
+
+@app.route('/companyform')
+def compnayform():
+    return render_template('companyform.html')
+
+# Get all company details
+
+
+@app.route('/company/getall')
+def get_company_data():
+    try:
+        return jsonify(company_list=[i.as_dict() for i in db.session.query(CompanyData).all()])
+    except:
+        response = app.response_class(
+            response=json.dumps(
+                'company data not found, try enterning some data using /companys/add'),
+            status=404,
+            mimetype='application/json'
+        )
+        return response
+
+# Add new company to the db
+
+
+@app.route('/company/add', methods=['POST'])
+def submit_company_data():
+    if request.method == 'POST':
+        name = request.form['name']
+        compid = request.form['compid']
+        hired15 = request.form['hired15']
+        hired16 = request.form['hired16']
+        hired17 = request.form['hired17']
+        hired18 = request.form['hired18']
+        hired19 = request.form['hired19']
+
+        if db.session.query(CompanyData).filter(CompanyData.compid == compid).count() == 0:
+            data = CompanyData(name, compid, hired15,
+                               hired16, hired17, hired18, hired19)
+            db.session.add(data)
+            db.session.commit()
+            print(name, compid, hired15, hired16, hired17, hired18, hired19)
+            print("Data added")
+
+            return jsonify(company_list=[i.as_dict() for i in db.session.query(CompanyData).all()])
+
+        response = app.response_class(
+            response=json.dumps(
+                'Could not add new company, check for duplicate company id'),
             status=400,
             mimetype='application/json'
         )
