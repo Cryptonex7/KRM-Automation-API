@@ -24,8 +24,14 @@ $ source 'env/Srcipts/activate'
 $ python app.py
 ```
 
-## To configure the studentdatabase initially (if needed)
+## To configure the studentdata table initially (if needed)
 
 ```
 cat ~/Downloads/studentdata.csv | \psql `heroku config:get DATABASE_URL --app krmdatabase` -c "COPY studentdata FROM STDIN WITH (FORMAT CSV, HEADER);"
+```
+
+## To configure the companydata table initially (if needed)
+
+```
+cat ~/Downloads/companydata.csv | \psql `heroku config:get DATABASE_URL --app krmdatabase` -c "COPY companydata FROM STDIN WITH (FORMAT CSV, HEADER);"
 ```
